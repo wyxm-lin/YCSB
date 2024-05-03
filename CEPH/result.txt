@@ -1,0 +1,31 @@
+./ceph 1 1 a 16 10000000
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 95.2348s
+speed: 105.004 KTPS
+bandwidth: 10000000 * 4KB / 1024 / 95.2348 = 410.17 MB/s
+===================================================================
+just async
+ReadDuration: 54.2531s
+UpdateDuration: 64.9943s
+Operation: 10000000
+RunDuration: 119.247s
+speed: 83.8593 KTPS
+bandwidth: 10000000 * 4KB / 1024 / 119.247 = 327.575 MB/s
+===================================================================
+enter Close
+Close duration: 0us
+consider this sync
+speed: 83.8593 KTPS
+bandwidth: 10000000 * 4KB / 1024 / 119.247 = 327.575 MB/s
+===================================================================
+close OK
+db file closed.
