@@ -42,6 +42,7 @@ void InitDB() {
         exit(1);
     }
     cout << "mmap OK\n";
+    memset(blk, 0, sb.st_size);
     
     char* check = (char*)blk;
     for (int i = 0; i < 10; i++) {
@@ -58,13 +59,13 @@ void cont_func(void *, void *use) {
 void sm_handler(int, erpc::SmEventType, erpc::SmErrType, void *) {}
 
 void req_handler(erpc::ReqHandle *req_handle, void *) {
-    mylog("server get request\n");
+    // mylog("server get request\n");
     auto *msg = reinterpret_cast<CommonMsg *>(req_handle->get_req_msgbuf()->buf_);
     {
-        mylog("msg->ops_id: %d msg->blockID\n", msg->ops_id, msg->blockID);
+        // mylog("msg->ops_id: %d msg->blockID\n", msg->ops_id, msg->blockID);
     }
     if (msg->req_type == RequestType::kRead) {
-        mylog("server read\n");
+        // mylog("server read\n");
         auto &resp = req_handle->pre_resp_msgbuf_;
         char* src = (char*)blk + msg->blockID * BLOCKSIZE;
         memcpy(resp.buf_, src, BLOCKSIZE); // 从mmap的文件中读取数据
@@ -73,14 +74,14 @@ void req_handler(erpc::ReqHandle *req_handle, void *) {
         rpc->enqueue_response(req_handle, &resp);
     } else if (msg->req_type == RequestType::kWrite) {
         // mtx[msg->blockID].lock(); // 写操作需要上锁
-        mylog("server write\n");
+        // mylog("server write\n");
         char* dst = (char*)blk + msg->blockID * BLOCKSIZE;
         memcpy(dst, msg + 1, BLOCKSIZE); // 将数据写入mmap的文件中
         auto &resp = req_handle->pre_resp_msgbuf_;
         rpc->enqueue_response(req_handle, &resp);
         // mtx[msg->blockID].unlock();
     } else if (msg->req_type == RequestType::kEmpty) {
-        mylog("server empty\n");
+        // mylog("server empty\n");
         auto &resp = req_handle->pre_resp_msgbuf_;
         rpc->enqueue_response(req_handle, &resp);
     } else {

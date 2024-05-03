@@ -11,7 +11,7 @@ using namespace std;
 
 int OneRequestContainBlockSize;
 const int SyncNumberMax = 128;
-int SyncNumber = 128; // 16个请求一起
+int SyncNumber = 16; // 16个请求一起
 int RequestTotNumber;
 
 uint32_t session;
@@ -37,30 +37,30 @@ void cont_func(void *, void *cbctx) {
 	// Step1: 得出该请求使用的req resp cb的index
 	int64_t avail_index = (int64_t)cbctx;
 	avail.push(avail_index); // NOTE 回收!!!
-	mylog("avail_index: %ld\n", avail_index);
+	// mylog("avail_index: %ld\n", avail_index);
     int BeginBlockID = cb[avail_index].BeginBlockID; // 取出以4KB为大小的块地址
 
 	// Step2: 处理信息
 	erpc::MsgBuffer &req = reqs[avail_index];
 	erpc::MsgBuffer &resp = resps[avail_index];
 	CommonMsg *msg = reinterpret_cast<CommonMsg *>(req.buf_);
-	mylog("get the %dth response\n", msg->ops_id);
+	// mylog("get the %dth response\n", msg->ops_id);
 	if (msg->req_type == kEmpty) {
 		/* do nothing */
-		mylog("cont_func get empty responce\n");
+		// mylog("cont_func get empty responce\n");
 	}
 	else if (msg->req_type == kRead) {
-		mylog("cont_func get read responce\n");
+		// mylog("cont_func get read responce\n");
 		int use_shared_buffer_id = cb[avail_index].use_shared_buffer_id; // 读数据也只是用一个shared的位置进行读取
-		mylog("use_shared_buffer_id: %d\n", use_shared_buffer_id);
+		// mylog("use_shared_buffer_id: %d\n", use_shared_buffer_id);
 		void* dst = (void*)SharedBuffer[use_shared_buffer_id];
 		memcpy(dst, (void*)resp.buf_, BLOCKSIZE); // 实际数据的copy (读请求的responce只有数据)
-		mylog("read response copy over\n");
+		// mylog("read response copy over\n");
 		avail_sync_buffer_id.push(use_shared_buffer_id); // NOTE 回收sync_buffer_id
 	}
 	else if (msg->req_type == kWrite) {
 		/* do nothing */
-		mylog("cont_func get write responce\n");
+		// mylog("cont_func get write responce\n");
 	}
 	else {
 		exit(-1);
@@ -97,7 +97,7 @@ void cont_func(void *, void *cbctx) {
         rpc->resize_msg_buffer(&req, sizeof(CommonMsg));
 
         // 加入队列
-        mylog("send the %dth request", msg->ops_id);
+        // mylog("send the %dth request", msg->ops_id);
         rpc->enqueue_request(session, kReqType, &req, &resp, cont_func, (void *)k);
     }
     else {
@@ -169,6 +169,9 @@ void Client::Init(string filename) {
 	int GetCnt = 0;
 	vector<Request> requests_vec;
 	while (fin >> id >> op >> key) {
+        if (key + OneRequestContainBlockSize - 1 > 10000000 - 1) { // 控制一下块号范围
+            key = 10000000 - 1 - OneRequestContainBlockSize + 1; // 进行修改
+        }
 		Request request;
 		if (op == "read") {
 			request.req_type = kRead;
@@ -214,12 +217,7 @@ void Client::Init(string filename) {
 
 void doRead(int RealKey, int ops_id) {
     int RealSyncNumber = min(SyncNumber, OneRequestContainBlockSize);
-    {
-        // 修改
-        if (RealKey + OneRequestContainBlockSize - 1 > SERVER_SIZE) {
-            RealKey = SERVER_SIZE - OneRequestContainBlockSize + 1;
-        }
-    }
+    // cout << "RealSyncNumber: " << RealSyncNumber << endl;
     send_total = 0;
     recv_total = 0;
     for (int i = 1; i <= RealSyncNumber; i++) {
@@ -253,11 +251,6 @@ void doRead(int RealKey, int ops_id) {
 
 void doWrite(int RealKey, int ops_id) {
     int RealSyncNumber = min(SyncNumber, OneRequestContainBlockSize);
-    {
-        if (RealKey + OneRequestContainBlockSize - 1 > SERVER_SIZE) {
-            RealKey = SERVER_SIZE - OneRequestContainBlockSize + 1;
-        }
-    }
     send_total = 0;
     recv_total = 0;
     for (int i = 1; i <= RealSyncNumber; i++) {
@@ -280,7 +273,7 @@ void doWrite(int RealKey, int ops_id) {
 		memset(buftmp, 'a', BLOCKSIZE);
 		buftmp[BLOCKSIZE - 1] = '\0';
 		memcpy(msg + 1, (void *)buftmp, BLOCKSIZE); // write拷贝数据(此处没有考虑数据的来源问题)
-        rpc->resize_msg_buffer(&req, sizeof(CommonMsg) + BLOCKSIZE); // 读的时候只需要这样 不需要+BLOCKSIZE
+        rpc->resize_msg_buffer(&req, sizeof(CommonMsg) + BLOCKSIZE); 
         
         // 加入队列
         rpc->enqueue_request(session, kReqType, &req, &resp, cont_func, (void *)k);
@@ -305,10 +298,11 @@ void Client::Run() {
     }
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    auto second = duration.count() / 1000000;
 	cout << "Time: " << duration.count() << "us" << endl;
-	cout << "IOPS: " << 1000000.0 * RequestTotNumber / duration.count() << "ops/s" << endl;
-	cout << "throughput: " << 1000000.0 * RequestTotNumber * BLOCKSIZE * OneRequestContainBlockSize / duration.count() / 1024 / 1024 << "MB/s" << endl;
-	cout << "if use 4096, the throughput is: " << 1000000.0 * RequestTotNumber * 4096 * OneRequestContainBlockSize / duration.count() / 1024 / 1024 << "MB/s" << endl;
+	cout << "IOPS: " << 1000000.0 * RequestTotNumber / duration.count()  << "ops/s" << endl;
+	cout << "throughput: " << 1000000.0 * RequestTotNumber * BLOCKSIZE / 1024 * OneRequestContainBlockSize / duration.count()  / 1024 << "MB/s" << endl;
+	cout << "if use 4096, the throughput is: " << 1000000.0 * RequestTotNumber * 4096  / 1024 * OneRequestContainBlockSize / duration.count()  / 1024 << "MB/s" << endl;
 }
 
 int main(int argc, char* argv[]) {
