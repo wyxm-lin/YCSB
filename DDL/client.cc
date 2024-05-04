@@ -10,9 +10,8 @@
 using namespace std;
 
 int OneRequestContainBlockSize;
-const int SyncNumberMax = 128;
-int SyncNumber = 16; // 16个请求一起
 int RequestTotNumber;
+const int SyncNumber = 32; // 16个请求一起
 
 uint32_t session;
 static erpc::Rpc<erpc::CTransport> *rpc;
@@ -20,8 +19,7 @@ static erpc::MsgBuffer reqs[MSG_BUFFER_NUM];
 static erpc::MsgBuffer resps[MSG_BUFFER_NUM];
 static Callback cb[MSG_BUFFER_NUM];
 static queue<int64_t> avail;
-static char SharedBuffer[SyncNumberMax][BLOCKSIZE];
-static queue<int> avail_sync_buffer_id;
+static char Buffer[BLOCKSIZE];
 static queue<Request> Requests;
 int send_total;
 int recv_total;
@@ -37,30 +35,18 @@ void cont_func(void *, void *cbctx) {
 	// Step1: 得出该请求使用的req resp cb的index
 	int64_t avail_index = (int64_t)cbctx;
 	avail.push(avail_index); // NOTE 回收!!!
-	// mylog("avail_index: %ld\n", avail_index);
     int BeginBlockID = cb[avail_index].BeginBlockID; // 取出以4KB为大小的块地址
 
 	// Step2: 处理信息
 	erpc::MsgBuffer &req = reqs[avail_index];
 	erpc::MsgBuffer &resp = resps[avail_index];
 	CommonMsg *msg = reinterpret_cast<CommonMsg *>(req.buf_);
-	// mylog("get the %dth response\n", msg->ops_id);
 	if (msg->req_type == kEmpty) {
-		/* do nothing */
-		// mylog("cont_func get empty responce\n");
 	}
 	else if (msg->req_type == kRead) {
-		// mylog("cont_func get read responce\n");
-		int use_shared_buffer_id = cb[avail_index].use_shared_buffer_id; // 读数据也只是用一个shared的位置进行读取
-		// mylog("use_shared_buffer_id: %d\n", use_shared_buffer_id);
-		void* dst = (void*)SharedBuffer[use_shared_buffer_id];
-		memcpy(dst, (void*)resp.buf_, BLOCKSIZE); // 实际数据的copy (读请求的responce只有数据)
-		// mylog("read response copy over\n");
-		avail_sync_buffer_id.push(use_shared_buffer_id); // NOTE 回收sync_buffer_id
+        memcpy(Buffer, resp.buf_, BLOCKSIZE); // 读数据的copy
 	}
 	else if (msg->req_type == kWrite) {
-		/* do nothing */
-		// mylog("cont_func get write responce\n");
 	}
 	else {
 		exit(-1);
@@ -84,9 +70,6 @@ void cont_func(void *, void *cbctx) {
         erpc::MsgBuffer &req = reqs[k];
         erpc::MsgBuffer &resp = resps[k];
         // 设置回调
-        int sync_buffer_id = avail_sync_buffer_id.front();
-        avail_sync_buffer_id.pop();	
-        cb[k].use_shared_buffer_id = sync_buffer_id;
         cb[k].BeginBlockID = BeginBlockID;
 
         // 修改req,即填充commonmsg
@@ -97,7 +80,6 @@ void cont_func(void *, void *cbctx) {
         rpc->resize_msg_buffer(&req, sizeof(CommonMsg));
 
         // 加入队列
-        // mylog("send the %dth request", msg->ops_id);
         rpc->enqueue_request(session, kReqType, &req, &resp, cont_func, (void *)k);
     }
     else {
@@ -107,7 +89,6 @@ void cont_func(void *, void *cbctx) {
         erpc::MsgBuffer &req = reqs[k];
         erpc::MsgBuffer &resp = resps[k];
         // 设置回调
-        cb[k].use_shared_buffer_id = -1;
         cb[k].BeginBlockID = BeginBlockID;
 
         // 修改req,即填充commonmsg
@@ -140,17 +121,12 @@ public:
 };
 
 Client::Client(string clientip, string serverip) : nexus(clientip.c_str()) {
-	cout << "Client object" << endl;
-	// nexus.register_req_func(kReqType, req_handler); // NOTE 现在用不上这个
-	
+	cout << "Client object" << endl;	
 	rpc = new erpc::Rpc<erpc::CTransport>(&nexus, nullptr, 0, sm_handler);
 	for (int i = 0; i < MSG_BUFFER_NUM; i++) {
 		avail.push(i);
 		reqs[i] = rpc->alloc_msg_buffer_or_die(MAX_MSG_SIZE);
 		resps[i] = rpc->alloc_msg_buffer_or_die(MAX_MSG_SIZE);
-	}
-	for (int i = 0; i < SyncNumber; i++) {
-		avail_sync_buffer_id.push(i);
 	}
 	session = rpc->create_session(serverip.c_str(), 0);
 	while (!rpc->is_connected(session)) rpc->run_event_loop_once();
@@ -178,7 +154,6 @@ void Client::Init(string filename) {
 			request.blockID = key;
 			request.ops_id = id;
 			requests_vec.push_back(request);
-			// Requests.push(request);
 		} 
 		else if (op == "scan") {
 			/* do nothing */
@@ -188,14 +163,12 @@ void Client::Init(string filename) {
 			request.blockID = key;
 			request.ops_id = id;
 			requests_vec.push_back(request);
-			// Requests.push(request);
 		} 
 		else if (op == "insert") {
 			request.req_type = kWrite;
 			request.blockID = key;
 			request.ops_id = id;
 			requests_vec.push_back(request);
-			// Requests.push(request);
 		} 
 		else if (op == "delete") {
 			/* do nothing */
@@ -208,8 +181,6 @@ void Client::Init(string filename) {
 	fin.close();
 
 	for (int i = 0; i < RequestTotNumber; i++) {	// std::random_device rd;
-	// std::mt19937 g(rd());
-	// std::shuffle(requests_vec.begin(), requests_vec.end(), g);
 		Requests.push(requests_vec[i]);
 	}
 	cout << "Client init OK" << endl;
@@ -217,7 +188,6 @@ void Client::Init(string filename) {
 
 void doRead(int RealKey, int ops_id) {
     int RealSyncNumber = min(SyncNumber, OneRequestContainBlockSize);
-    // cout << "RealSyncNumber: " << RealSyncNumber << endl;
     send_total = 0;
     recv_total = 0;
     for (int i = 1; i <= RealSyncNumber; i++) {
@@ -228,9 +198,6 @@ void doRead(int RealKey, int ops_id) {
         erpc::MsgBuffer &resp = resps[k];
 
         // 设置回调
-        int sync_buffer_id = avail_sync_buffer_id.front(); // 读请求用于存储数据
-        avail_sync_buffer_id.pop();
-        cb[k].use_shared_buffer_id = sync_buffer_id;
         cb[k].BeginBlockID = RealKey; // 起始块号
 
         // 填充commonmsg
@@ -261,7 +228,6 @@ void doWrite(int RealKey, int ops_id) {
         erpc::MsgBuffer &resp = resps[k];
 
         // 设置回调
-        cb[k].use_shared_buffer_id = -1; // write不需要使用这个
         cb[k].BeginBlockID = RealKey; // 起始块号
 
         // 填充commonmsg
@@ -269,10 +235,7 @@ void doWrite(int RealKey, int ops_id) {
         msg->req_type = kWrite;
         msg->ops_id = ops_id;
         msg->blockID = RealKey + (i - 1) * BLOCKSIZE; // 修改正确
-        char buftmp[BLOCKSIZE];
-		memset(buftmp, 'a', BLOCKSIZE);
-		buftmp[BLOCKSIZE - 1] = '\0';
-		memcpy(msg + 1, (void *)buftmp, BLOCKSIZE); // write拷贝数据(此处没有考虑数据的来源问题)
+		memcpy(msg + 1, Buffer, BLOCKSIZE); // write拷贝数据(此处没有考虑数据的来源问题)
         rpc->resize_msg_buffer(&req, sizeof(CommonMsg) + BLOCKSIZE); 
         
         // 加入队列

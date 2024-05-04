@@ -30,7 +30,6 @@ struct CommonMsg {
 };
 
 typedef struct Callback {
-	int use_shared_buffer_id;
 	int BeginBlockID;
 } Callback;
 
