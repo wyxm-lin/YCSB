@@ -150,3 +150,694 @@ bandwidth: 10000000 * 4KB / 1024 / 92.2337 = 423.517 MB/s
 enter Close
 close OK
 db file closed.
+
+
+
+ bash cmd.sh 
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 41.1028s
+speed: 2.43292 KTPS
+bandwidth: 100000 * 512 * 4KB / 1024 / 41.1028 = 4865.84 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 19.8909s
+speed: 5.02743 KTPS
+bandwidth: 100000 * 256 * 4KB / 1024 / 19.8909 = 5027.43 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 11.68s
+speed: 8.56162 KTPS
+bandwidth: 100000 * 128 * 4KB / 1024 / 11.68 = 4280.81 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 5.6037s
+speed: 17.8453 KTPS
+bandwidth: 100000 * 64 * 4KB / 1024 / 5.6037 = 4461.33 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 3.41075s
+speed: 29.319 KTPS
+bandwidth: 100000 * 32 * 4KB / 1024 / 3.41075 = 3664.88 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 2.24609s
+speed: 44.5218 KTPS
+bandwidth: 100000 * 16 * 4KB / 1024 / 2.24609 = 2782.61 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.89816s
+speed: 52.6827 KTPS
+bandwidth: 100000 * 8 * 4KB / 1024 / 1.89816 = 1646.34 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.73342s
+speed: 57.6894 KTPS
+bandwidth: 100000 * 4 * 4KB / 1024 / 1.73342 = 901.397 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.77864s
+speed: 56.2227 KTPS
+bandwidth: 100000 * 2 * 4KB / 1024 / 1.77864 = 439.24 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.32337s
+speed: 75.5644 KTPS
+bandwidth: 100000 * 1 * 4KB / 1024 / 1.32337 = 295.173 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+
+
+bash cmd.sh 
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 47.9734s
+speed: 2.08449 KTPS
+bandwidth: 100000 * 512 * 4KB / 1024 / 47.9734 = 4168.98 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 22.9975s
+speed: 4.34829 KTPS
+bandwidth: 100000 * 256 * 4KB / 1024 / 22.9975 = 4348.29 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 11.7678s
+speed: 8.49774 KTPS
+bandwidth: 100000 * 128 * 4KB / 1024 / 11.7678 = 4248.87 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 5.90709s
+speed: 16.9288 KTPS
+bandwidth: 100000 * 64 * 4KB / 1024 / 5.90709 = 4232.2 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 3.16293s
+speed: 31.6163 KTPS
+bandwidth: 100000 * 32 * 4KB / 1024 / 3.16293 = 3952.04 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.99224s
+speed: 50.1948 KTPS
+bandwidth: 100000 * 16 * 4KB / 1024 / 1.99224 = 3137.18 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.77946s
+speed: 56.1969 KTPS
+bandwidth: 100000 * 8 * 4KB / 1024 / 1.77946 = 1756.15 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.57795s
+speed: 63.3735 KTPS
+bandwidth: 100000 * 4 * 4KB / 1024 / 1.57795 = 990.211 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.37972s
+speed: 72.4784 KTPS
+bandwidth: 100000 * 2 * 4KB / 1024 / 1.37972 = 566.237 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.28485s
+speed: 77.83 KTPS
+bandwidth: 100000 * 1 * 4KB / 1024 / 1.28485 = 304.023 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+
+bash cmd.sh 
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 41.3348s
+speed: 2.41927 KTPS
+bandwidth: 100000 * 512 * 4KB / 1024 / 41.3348 = 4838.54 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 21.4673s
+speed: 4.65824 KTPS
+bandwidth: 100000 * 256 * 4KB / 1024 / 21.4673 = 4658.24 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 10.9596s
+speed: 9.12441 KTPS
+bandwidth: 100000 * 128 * 4KB / 1024 / 10.9596 = 4562.21 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 5.79911s
+speed: 17.244 KTPS
+bandwidth: 100000 * 64 * 4KB / 1024 / 5.79911 = 4311 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 3.92149s
+speed: 25.5005 KTPS
+bandwidth: 100000 * 32 * 4KB / 1024 / 3.92149 = 3187.56 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 2.28314s
+speed: 43.7994 KTPS
+bandwidth: 100000 * 16 * 4KB / 1024 / 2.28314 = 2737.46 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.66341s
+speed: 60.1176 KTPS
+bandwidth: 100000 * 8 * 4KB / 1024 / 1.66341 = 1878.67 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.61238s
+speed: 62.0201 KTPS
+bandwidth: 100000 * 4 * 4KB / 1024 / 1.61238 = 969.064 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.45311s
+speed: 68.818 KTPS
+bandwidth: 100000 * 2 * 4KB / 1024 / 1.45311 = 537.64 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.50794s
+speed: 66.3157 KTPS
+bandwidth: 100000 * 1 * 4KB / 1024 / 1.50794 = 259.046 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+
+ bash cmd.sh 
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 60.7024s
+speed: 1.64738 KTPS
+bandwidth: 100000 * 512 * 4KB / 1024 / 60.7024 = 3294.76 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 21.3772s
+speed: 4.67788 KTPS
+bandwidth: 100000 * 256 * 4KB / 1024 / 21.3772 = 4677.88 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 10.7709s
+speed: 9.28424 KTPS
+bandwidth: 100000 * 128 * 4KB / 1024 / 10.7709 = 4642.12 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 5.15577s
+speed: 19.3958 KTPS
+bandwidth: 100000 * 64 * 4KB / 1024 / 5.15577 = 4848.94 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 2.99514s
+speed: 33.3874 KTPS
+bandwidth: 100000 * 32 * 4KB / 1024 / 2.99514 = 4173.42 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.87266s
+speed: 53.4 KTPS
+bandwidth: 100000 * 16 * 4KB / 1024 / 1.87266 = 3337.5 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.38124s
+speed: 72.3987 KTPS
+bandwidth: 100000 * 8 * 4KB / 1024 / 1.38124 = 2262.46 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.13561s
+speed: 88.0587 KTPS
+bandwidth: 100000 * 4 * 4KB / 1024 / 1.13561 = 1375.92 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.06482s
+speed: 93.9124 KTPS
+bandwidth: 100000 * 2 * 4KB / 1024 / 1.06482 = 733.691 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
+High resolution clock period: 1/1000000000 seconds
+Created a cluster handle.
+Read the config file.
+Connected to the cluster.
+Created I/O context.
+Opened rbd image image1.img.
+db file opened.
+BlockID init OK
+Client init OK
+do the async and C++ thread
+AllDuration: 1.02039s
+speed: 98.0022 KTPS
+bandwidth: 100000 * 1 * 4KB / 1024 / 1.02039 = 382.821 MB/s
+===================================================================
+enter Close
+close OK
+db file closed.
